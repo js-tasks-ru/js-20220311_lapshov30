@@ -5,5 +5,18 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
+  const h = arr.slice();
 
+  if (param === 'asc') {
+    h.sort((a, b) => {
+      return a.localeCompare(b, 'ru-u-en', { caseFirst: 'upper' });
+    });
+    return h;
+  } else if (param === 'desc') {
+    h.sort((b, a) => {
+      return a.localeCompare(b, 'ru-u-en', { caseFirst: 'upper' });
+    });
+    return h;
+  }
+  console.error('Укажите правильный param = asc / desc');
 }
