@@ -6,12 +6,16 @@
 export function createGetter(path) {
   const pathToObj = path.split('.');
   return (obj) => {
-    while (pathToObj.length > 0) {
-      const j = pathToObj.shift();
-      if (j in obj) {
-        obj = obj[j];
+    if (typeof (obj) === 'object') {
+      while (pathToObj.length > 0) {
+        const j = pathToObj.shift();
+        if (j in obj) {
+          obj = obj[j];
+        } else {
+          return undefined;
+        }
       }
+      return obj;
     }
-    return obj;
   };
 }
