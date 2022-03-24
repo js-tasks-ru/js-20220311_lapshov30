@@ -4,14 +4,24 @@
  * @param {number} size - the allowed size of consecutive identical symbols
  * @returns {string} - the new string without extra symbols according passed size
  */
-export function trimSymbols(string, size) {
-  const Arr = string.split('');
+export const trimSymbols = (string, size) => {
+  if (size === 0) {return '';}
+  if (size === undefined) {return string;}
 
-  const newArr = Arr.filter((item, index) => {
-    if (Arr[index] !== Arr[index + size]) {
-      return item;
+  let count = 0;
+  const result = [];
+
+  for (const item of string) {
+    if (result[result.length - 1] === item) {
+      if (count < size) {
+        result.push(item);
+        count += 1;
+      }
+    } else {
+      count = 1;
+      result.push(item);
     }
-  });
+  }
 
-  return newArr.join('');
-}
+  return result.join('');
+};
